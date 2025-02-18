@@ -3,6 +3,7 @@ module github.com/xxw1ldl1nxx/sn4ke
 go 1.23.4
 
 require (
+	github.com/eiannone/keyboard v0.0.0-20220611211555-0d226195f203
 	github.com/fatih/color v1.18.0
 	github.com/xxw1ldl1nxx/lynn v0.0.0-20250215095049-3a50eb0c2945
 )

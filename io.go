@@ -1,16 +1,19 @@
 package sn4ke
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"os/exec"
 	"strings"
+	"time"
 
+	"github.com/eiannone/keyboard"
 	"github.com/fatih/color"
 	"github.com/xxw1ldl1nxx/lynn"
 )
 
-func Stdout(matrix [][]int, score int) {
+func StdOut(matrix [][]int, score int) {
 	cmd := exec.Command("cmd", "/c", "cls")
 	cmd.Stdout = os.Stdout
 	cmd.Run()
@@ -52,7 +55,7 @@ func Stdout(matrix [][]int, score int) {
 	fmt.Printf("\nScore: %d\n\n", score)
 }
 
-func Stdin() Direction {
+func StdIn() Direction {
 
 	var button string
 	for {
@@ -66,4 +69,24 @@ func Stdin() Direction {
 		}
 		fmt.Println("wrong button")
 	}
+}
+
+func StdTimeIn() Direction {
+	inputCh := make(chan string)
+	ctx, cancel := context.WithTimeout(context.TODO(), time.Second)
+
+	go func() {
+		defer cancel()
+		keyboard.Open()
+		button, _, _ := keyboard.GetKey()
+		inputCh <- string(button)
+	}()
+
+	select {
+	case <-ctx.Done():
+		return NONE
+	case button := <-inputCh:
+		return dirButton[button]
+	}
+
 }

@@ -219,7 +219,7 @@ func (a *Apple) setPos(snake Snake) error {
 }
 
 // func main() {
-// 	ss := NewSession(6, 6, Stdin, Stdout)
+// 	ss := NewSession(6, 6, StdTimeIn, StdOut)
 // 	for {
 // 		ss.Draw()
 // 		if err := ss.Update(); err == ErrSnakeDied || err == ErrBigSnake {
